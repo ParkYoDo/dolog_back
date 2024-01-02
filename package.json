@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build": "tsc -p .",
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts"
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register  src/server.ts",
+    "build": "tsc -p . && tsc-alias"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,8 @@
     "@types/node": "^20.10.6",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   }
 }
