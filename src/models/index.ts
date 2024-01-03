@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
 const onConnectMongoDB = () => {
-  // 만일 배포용이 아니라면, 디버깅 on
-  if (process.env.NODE_ENV !== 'production') {
-    mongoose.set('debug', true); // 몽고 쿼리가 콘솔에서 뜨게 한다.
-  }
-
   mongoose.connect(
     `mongodb+srv://${process.env.DB_ID}:${process.env.DB_PASSWORD}@cluster.5m7wvho.mongodb.net/?retryWrites=true&w=majority`,
   );

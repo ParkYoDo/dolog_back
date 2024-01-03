@@ -4,7 +4,7 @@ const {
   Types: { ObjectId },
 } = Schema;
 
-const commentSchema = new Schema({
+const postSchema = new Schema({
   // _id 부분은 기본적으로 생략. 알아서 Object.id를 넣어줌
   commenter: {
     type: ObjectId,
@@ -21,6 +21,6 @@ const commentSchema = new Schema({
   },
 });
 
-const commentModel = mongoose.model('Comment', commentSchema);
+const postModel = mongoose.model('Post', postSchema);
 
-export default commentModel;
+export default postModel;

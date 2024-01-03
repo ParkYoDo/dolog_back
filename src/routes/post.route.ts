@@ -1,10 +1,9 @@
 import { Router } from 'express';
 import postController from '@controllers/post.controller';
+import postModel from '@models/post.model';
 
 const router = Router();
 
-router.get('/test1', postController.test1);
-
-router.get('/test2', postController.test2);
+router.get('/create', postController.create);
 
 export default router;
