@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import postRouter from '@routes/post.route';
+import authRouter from './auth.route';
+import postRouter from './post.route';
 
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.json('Hello');
+  res.json('Do.log');
 });
 
+router.use('/auth', authRouter);
 router.use('/post', postRouter);
 
 export default router;
