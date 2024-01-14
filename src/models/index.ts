@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const onConnectMongoDB = () => {
   mongoose.connect(
-    `mongodb+srv://${process.env.DB_ID}:${process.env.DB_PASSWORD}@cluster.5m7wvho.mongodb.net/?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.DB_ID}:${process.env.DB_PASSWORD}@cluster.5m7wvho.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   );
 };
 
