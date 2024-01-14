@@ -11,9 +11,14 @@ onConnectMongoDB();
 const app: Application = express();
 var port = process.env.PORT;
 
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(
+  cors({
+    origin: 'http://localhost:8081',
+    credentials: true,
+  }),
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/', router);
 
