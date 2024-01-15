@@ -9,7 +9,7 @@ dotenv.config();
 onConnectMongoDB();
 
 const app: Application = express();
-var port = process.env.PORT;
+const port = process.env.PORT;
 
 app.use(
   cors({
