@@ -16,10 +16,10 @@ const authSchema = new Schema({
 
   // comment: String, // 옵션에 type 밖에 없을 때 간단하게 표현 가능
 
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now, // 기본값
-  // },
+  createdAt: {
+    type: Date,
+    default: Date.now, // 기본값
+  },
 });
 
 const authModel = mongoose.model('Auth', authSchema);
