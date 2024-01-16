@@ -1,6 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
 import authService from '@services/auth.service';
-import { verify } from 'crypto';
+import { NextFunction, Request, Response } from 'express';
 import authUtil from 'utils/auth.util';
 
 const authController = {
@@ -20,7 +19,7 @@ const authController = {
   signIn: async (req: Request, res: Response, next: NextFunction) => {
     const { id, password } = req.body;
     try {
-      const result = await authService.signIn(id, password);
+      const result: any = await authService.signIn(id, password);
       console.log(`[SIGNUP] : ${id}(${result})`);
       if (result) {
         res.cookie('refreshToken', result.accessToken, {
@@ -43,10 +42,12 @@ const authController = {
       return res.status(401).json({ message: '이미 존재하는 ID입니다.' });
     }
   },
+
   silentRefresh: async (req: Request, res: Response, next: NextFunction) => {
-    const { refreshToken } = req.body;
-    const userId = authUtil.verifyRefreshToken(refreshToken);
-    if (userId) {
+    if (req.cookies?.refreshToken) {
+      const refreshTokena = req.cookies.refreshToken;
+      const userId = authUtil.verifyRefreshToken(refreshTokena);
+
       const accessToken = authUtil.getAccessToken(userId);
       const refreshToken = authUtil.getRefreshToken(userId);
 
@@ -54,8 +55,11 @@ const authController = {
         path: '/',
         httpOnly: true,
       });
+      return res.status(200).json({ message: 'token 갱신 성공.', accessToken });
+    }
 
-      res.status(200).json({ message: 'token 갱신 성공.', accessToken: accessToken });
+    if (req.cookies?.refreshToken) {
+      return res.status(200).json({ message: 'refresh token이 없어요' });
     }
   },
 };
