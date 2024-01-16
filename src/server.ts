@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import onConnectMongoDB from '@models/index';
 import router from '@routes/index';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 // MongoDB 연결
@@ -19,6 +20,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use('/', router);
 
