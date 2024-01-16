@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 const authUtil = {
   getAccessToken: (userId: string) => {
     const accessToken = jwt.sign({ id: userId }, process.env.JWT_SECRET_KEY!, {
-      expiresIn: '1h',
+      expiresIn: '1d',
     });
     return accessToken;
   },
