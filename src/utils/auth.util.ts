@@ -1,15 +1,15 @@
 import jwt from 'jsonwebtoken';
 
 const authUtil = {
-  getAccessToken: (userId: string) => {
-    const accessToken = jwt.sign({ id: userId }, process.env.JWT_SECRET_KEY!, {
+  getAccessToken: (id: string, name: string) => {
+    const accessToken = jwt.sign({ id, name }, process.env.JWT_SECRET_KEY!, {
       expiresIn: '1d',
     });
     return accessToken;
   },
 
-  getRefreshToken: (userId: string) => {
-    const refreshTokent = jwt.sign({ id: userId }, process.env.JWT_SECRET_KEY!, {
+  getRefreshToken: (id: string, name: string) => {
+    const refreshTokent = jwt.sign({ id, name }, process.env.JWT_SECRET_KEY!, {
       expiresIn: '14d',
     });
     return refreshTokent;
