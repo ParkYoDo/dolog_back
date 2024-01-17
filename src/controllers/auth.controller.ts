@@ -45,17 +45,17 @@ const authController = {
   silentRefresh: async (req: Request, res: Response, next: NextFunction) => {
     if (req.cookies?.refreshToken) {
       try {
-        const { newAccessToken, newRefreshToken }: any = authService.silentRefresh(
+        const { accessToken, refreshToken }: any = authService.silentRefresh(
           req.cookies.refreshToken,
         );
         console.log(`[silentRefresh] : Token Refreshed`);
 
-        res.cookie('refreshToken', newRefreshToken, {
+        res.cookie('refreshToken', refreshToken, {
           path: '/',
           httpOnly: true,
         });
 
-        return res.status(200).json({ message: 'token 갱신 성공.', newAccessToken });
+        return res.status(200).json({ message: 'token 갱신 성공.', accessToken });
       } catch (error) {
         console.log(error);
       }

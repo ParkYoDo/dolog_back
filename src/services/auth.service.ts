@@ -13,6 +13,7 @@ const authService = {
   signIn: async (id: string, password: string) => {
     const user: any = await authModel.findOne({ id });
     const isCorrectPassword = await bcrypt.compare(password, user?.password);
+    console.log(isCorrectPassword);
 
     if (isCorrectPassword) {
       const accessToken = authUtil.getAccessToken(user.id, user.name);
@@ -22,13 +23,13 @@ const authService = {
     }
   },
 
-  silentRefresh: (refreshToken: string) => {
-    const { id, name } = authUtil.verifyRefreshToken(refreshToken);
+  silentRefresh: (oldRefreshToken: string) => {
+    const { id, name } = authUtil.verifyRefreshToken(oldRefreshToken);
 
-    const newAccessToken = authUtil.getAccessToken(id, name);
-    const newRefreshToken = authUtil.getRefreshToken(id, name);
+    const accessToken = authUtil.getAccessToken(id, name);
+    const refreshToken = authUtil.getRefreshToken(id, name);
 
-    return { newAccessToken, newRefreshToken };
+    return { accessToken, refreshToken };
   },
 };
 
