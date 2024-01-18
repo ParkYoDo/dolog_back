@@ -19,19 +19,19 @@ const authController = {
   signIn: async (req: Request, res: Response, next: NextFunction) => {
     const { id, password } = req.body;
     try {
-      const { accessToken, refreshToken }: any = await authService.signIn(id, password);
+      const { accessToken, refreshToken, uuid }: any = await authService.signIn(id, password);
       console.log(`[SIGN IN] : ${id}`);
 
-      if (accessToken && refreshToken) {
+      if (accessToken && refreshToken && uuid) {
         res.cookie('refreshToken', refreshToken, {
           path: '/',
           httpOnly: true,
         });
 
-        res.status(200).json({ message: '로그인에 성공하였습니다.', accessToken });
+        res.status(200).json({ message: '로그인에 성공하였습니다.', accessToken, uuid });
       }
 
-      if (!(accessToken && refreshToken)) {
+      if (!(accessToken && refreshToken && uuid)) {
         res.status(401).send({
           message: '로그인 실패',
         });
@@ -48,6 +48,7 @@ const authController = {
         const { accessToken, refreshToken }: any = authService.silentRefresh(
           req.cookies.refreshToken,
         );
+
         console.log(`[silentRefresh] : Token Refreshed`);
 
         res.cookie('refreshToken', refreshToken, {
@@ -58,11 +59,12 @@ const authController = {
         return res.status(200).json({ message: 'token 갱신 성공.', accessToken });
       } catch (error) {
         console.log(error);
+        return res.status(403).json({ message: 'token 만료' });
       }
     }
 
-    if (req.cookies?.refreshToken) {
-      return res.status(200).json({ message: 'refresh token이 없어요' });
+    if (!req.cookies?.refreshToken) {
+      return res.status(403).json({ message: 'refresh token이 없어요' });
     }
   },
 };
