@@ -2,10 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import postService from '@services/post.service';
 
 const postController = {
-  create: async (req: Request, res: Response, next: NextFunction) => {
-    const users = await postService.getUsers(req, res, next);
-    console.log(users);
-    res.status(200).json(users);
+  getPresignedUrl: async (req: Request, res: Response, next: NextFunction) => {
+    const fileName = String(req.query.fileName);
+    const presignedUrl = await postService.getPresignedUrl(fileName);
+
+    res.status(200).json(presignedUrl);
   },
 };
 

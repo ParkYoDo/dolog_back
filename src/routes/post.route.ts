@@ -3,6 +3,6 @@ import postController from '@controllers/post.controller';
 
 const postRouter = Router();
 
-postRouter.get('/create', postController.create);
+postRouter.get('/presigned-url', postController.getPresignedUrl);
 
 export default postRouter;
