@@ -1,20 +1,23 @@
 import mongoose, { Schema } from 'mongoose';
 
-const {
-  Types: { ObjectId },
-} = Schema;
-
 const postSchema = new Schema({
-  // _id 부분은 기본적으로 생략. 알아서 Object.id를 넣어줌
-  commenter: {
-    type: ObjectId,
+  autor: {
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: 'User',
+    ref: 'Auth',
   },
-  comment: {
+  title: {
     type: String,
     required: true,
   },
+  content: {
+    type: String,
+    required: true,
+  },
+  thumbnailImage: String,
+  thumbnailText: String,
+  url: String,
+  category: String,
   createdAt: {
     type: Date,
     default: Date.now,
