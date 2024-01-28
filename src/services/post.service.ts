@@ -23,6 +23,18 @@ const postService = {
 
     return presignedUrl;
   },
+
+  uploadPost: async (data: any) => {
+    return await postModel.create(data);
+  },
+
+  getPost: async () => {
+    return await postModel.find();
+  },
+
+  getOnePost: async (postUrl: string) => {
+    return await postModel.findOne({ url: postUrl });
+  },
 };
 
 export default postService;
