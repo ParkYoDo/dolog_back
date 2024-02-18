@@ -1,9 +1,10 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import onConnectMongoDB from '@models/index';
-import router from '@routes/index';
+
 import cookieParser from 'cookie-parser';
+import onConnectMongoDB from './models';
+import router from './routes';
 
 dotenv.config();
 // MongoDB 연결

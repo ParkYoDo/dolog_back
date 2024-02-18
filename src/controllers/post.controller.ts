@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import postService from '@services/post.service';
+import postService from '../services/post.service';
 
 const postController = {
   getPresignedUrl: async (req: Request, res: Response, next: NextFunction) => {

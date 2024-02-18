@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import authUtil from 'utils/auth.util';
+import authUtil from '../utils/auth.util';
 
 const jwtMiddleware = (req: Request, res: Response, next: NextFunction) => {
   console.log(req.headers.authorization);

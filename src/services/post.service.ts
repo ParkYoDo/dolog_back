@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import postModel from '@models/post.model';
 import aws from 'aws-sdk';
+import postModel from '../models/post.model';
 
 const postService = {
   getPresignedUrl: async (fileName: string) => {

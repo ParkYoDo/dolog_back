@@ -1,6 +1,6 @@
-import authModel from '@models/auth.model';
 import bcrypt from 'bcrypt';
-import authUtil from 'utils/auth.util';
+import authModel from '../models/auth.model';
+import authUtil from '../utils/auth.util';
 
 const authService = {
   signUp: async (id: string, password: string, name: string) => {
