@@ -30,7 +30,6 @@ const postController = {
   },
 
   getPost: async (req: Request, res: Response, next: NextFunction) => {
-    console.log(2);
     try {
       const result = await postService.getPost();
       return res.status(200).json(result);
